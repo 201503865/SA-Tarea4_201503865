@@ -12,6 +12,29 @@ Es una aplicacion donde se utiliza SOA para simular algunos de los servicios que
 
 Los servicios fueron orquestados por medio de BPEL
 
+## Video Demostracion BPEL
+
+https://youtu.be/3EFat95UgaM
+
 ## Arquitectura
 
 ![BPEL](https://github.com/201503865/SA-Tarea4_201503865/arq.jpeg)
+
+#Servicio Disponible
+
+## Cliente
+
+Se pide el id del cliente que solicita el viaje para encontrar su ubicacion.
+
+### Clases
+ - Clase cliente: es el nodo cliente que contiene la informacion por cliente
+ 
+ ##Rastreo
+ 
+ Se obtiene la ubicacion del clienta para encontrar carros que se encuentren cercanos a su zona
+ 
+ ##Pilotos
+
+ Se obtiene a que piloto pertenece el automovil, para obtener sus datos y ser enviados al cliente.
+ 
+ 
