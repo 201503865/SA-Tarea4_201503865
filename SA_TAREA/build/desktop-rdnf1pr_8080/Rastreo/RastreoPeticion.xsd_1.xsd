@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://PeticionRastreo/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://PeticionRastreo/">
+
+<xs:element name="AlmacenarDatos" type="tns:AlmacenarDatos" />
+
+<xs:element name="AlmacenarDatosResponse" type="tns:AlmacenarDatosResponse" />
+
+<xs:element name="UbicarAuto" type="tns:UbicarAuto" />
+
+<xs:element name="UbicarAutoResponse" type="tns:UbicarAutoResponse" />
+
+<xs:complexType name="UbicarAuto">
+<xs:sequence>
+<xs:element name="ubicacion" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UbicarAutoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AlmacenarDatos">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="AlmacenarDatosResponse">
+<xs:sequence />
+</xs:complexType>
+</xs:schema>

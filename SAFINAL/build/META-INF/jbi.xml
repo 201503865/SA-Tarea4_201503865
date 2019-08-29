@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="SAFINAL" xmlns:ns2="http://enterprise.netbeans.org/bpel/SA_TAREA/SA_TAREA" xmlns:ns3="http://PeticionesCliente/" xmlns:ns4="http://PeticionesPiloto/" xmlns:ns5="http://PeticionRastreo/" xmlns:ns6="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/jbi ./jbi.xsd">
+    <service-assembly>
+        <identification>
+            <name>SAFINAL</name>
+            <description>Represents the Service Assembly of SAFINAL</description>
+        </identification>
+        <service-unit>
+            <identification>
+                <name>SAFINAL-SA_TAREA</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>SA_TAREA.jar</artifacts-zip>
+                <component-name>sun-bpel-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>SAFINAL-sun-http-binding</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>sun-http-binding.jar</artifacts-zip>
+                <component-name>sun-http-binding</component-name>
+            </target>
+        </service-unit>
+        <connections>
+            <connection>
+                <consumer endpoint-name="casaPort1" service-name="ns1:SAFINALService1"/>
+                <provider endpoint-name="IngresoPortTypeRole_myRole" service-name="ns2:PartnerLink1"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="PeticionesClienteRole_partnerRole" service-name="ns2:PartnerLink2"/>
+                <provider endpoint-name="PeticionesClientePort" service-name="ns3:PeticionesCliente"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="PeticionesPilotosRole_partnerRole" service-name="ns2:PartnerLink3"/>
+                <provider endpoint-name="PeticionesPilotosPort" service-name="ns4:PeticionesPilotos"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="RastreoPeticionRole_partnerRole" service-name="ns2:PartnerLink4"/>
+                <provider endpoint-name="RastreoPeticionPort" service-name="ns5:RastreoPeticion"/>
+            </connection>
+        </connections>
+        <route-types xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <source endpoint-name="casaPort1" mode="local" routing-rule="default" service-name="ns1:SAFINALService1">direct</source>
+            <source endpoint-name="PeticionesClienteRole_partnerRole" mode="local" routing-rule="default" service-name="ns2:PartnerLink2">direct</source>
+            <source endpoint-name="PeticionesPilotosRole_partnerRole" mode="local" routing-rule="default" service-name="ns2:PartnerLink3">direct</source>
+            <source endpoint-name="RastreoPeticionRole_partnerRole" mode="local" routing-rule="default" service-name="ns2:PartnerLink4">direct</source>
+        </route-types>
+        <interface-mapping xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <implementation>
+                <by-provider endpoint-name="IngresoPortTypeRole_myRole" service-name="ns2:PartnerLink1"/>
+                <interface name="ns6:IngresoPortType"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="PeticionesClientePort" service-name="ns3:PeticionesCliente"/>
+                <interface name="ns3:PeticionesCliente"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="PeticionesPilotosPort" service-name="ns4:PeticionesPilotos"/>
+                <interface name="ns4:PeticionesPilotos"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="RastreoPeticionPort" service-name="ns5:RastreoPeticion"/>
+                <interface name="ns5:RastreoPeticion"/>
+            </implementation>
+        </interface-mapping>
+    </service-assembly>
+</jbi>

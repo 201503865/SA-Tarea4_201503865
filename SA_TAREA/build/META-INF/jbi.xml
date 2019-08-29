@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns0="http://enterprise.netbeans.org/bpel/SA_TAREA/SA_TAREA" xmlns:ns1="http://PeticionesCliente/" xmlns:ns2="http://PeticionRastreo/" xmlns:ns3="http://PeticionesPiloto/" xmlns:ns4="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" xmlns:ns5="http://www.sun.com/jbi/descriptor/service-unit" version="1.0">
+    <services binding-component="false">
+        <provides endpoint-name="IngresoPortTypeRole_myRole" interface-name="ns4:IngresoPortType" service-name="ns0:PartnerLink1">
+            <ns5:display-name>PartnerLink1</ns5:display-name>
+            <ns5:process-name>SA_TAREA</ns5:process-name>
+            <ns5:file-path>SA_TAREA.bpel</ns5:file-path>
+        </provides>
+        <consumes endpoint-name="PeticionesClienteRole_partnerRole" interface-name="ns1:PeticionesCliente" service-name="ns0:PartnerLink2">
+            <ns5:display-name>PartnerLink2</ns5:display-name>
+            <ns5:process-name>SA_TAREA</ns5:process-name>
+            <ns5:file-path>SA_TAREA.bpel</ns5:file-path>
+        </consumes>
+        <consumes endpoint-name="RastreoPeticionRole_partnerRole" interface-name="ns2:RastreoPeticion" service-name="ns0:PartnerLink4">
+            <ns5:display-name>PartnerLink4</ns5:display-name>
+            <ns5:process-name>SA_TAREA</ns5:process-name>
+            <ns5:file-path>SA_TAREA.bpel</ns5:file-path>
+        </consumes>
+        <consumes endpoint-name="PeticionesPilotosRole_partnerRole" interface-name="ns3:PeticionesPilotos" service-name="ns0:PartnerLink3">
+            <ns5:display-name>PartnerLink3</ns5:display-name>
+            <ns5:process-name>SA_TAREA</ns5:process-name>
+            <ns5:file-path>SA_TAREA.bpel</ns5:file-path>
+        </consumes>
+    </services>
+</jbi>

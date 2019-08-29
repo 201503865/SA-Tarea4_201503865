@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://desktop-rdnf1pr:8080/Rastreo/RastreoPeticion?wsdl" uri="../desktop-rdnf1pr_8080/Rastreo/RastreoPeticion.wsdl"/>
+    <system systemId="http://desktop-rdnf1pr:8080/Rastreo/RastreoPeticion?xsd=1" uri="../desktop-rdnf1pr_8080/Rastreo/RastreoPeticion.xsd_1.xsd"/>
+    <system systemId="http://desktop-rdnf1pr:8080/Clientes/PeticionesCliente?wsdl" uri="../desktop-rdnf1pr_8080/Clientes/PeticionesCliente.wsdl"/>
+    <system systemId="http://desktop-rdnf1pr:8080/Clientes/PeticionesCliente?xsd=1" uri="../desktop-rdnf1pr_8080/Clientes/PeticionesCliente.xsd_1.xsd"/>
+    <system systemId="http://desktop-rdnf1pr:8080/Pilotos/PeticionesPilotos?wsdl" uri="../desktop-rdnf1pr_8080/Pilotos/PeticionesPilotos.wsdl"/>
+    <system systemId="http://desktop-rdnf1pr:8080/Pilotos/PeticionesPilotos?xsd=1" uri="../desktop-rdnf1pr_8080/Pilotos/PeticionesPilotos.xsd_1.xsd"/>
+</catalog>

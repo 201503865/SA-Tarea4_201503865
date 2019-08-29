@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://PeticionesCliente/" xmlns:ns2="http://PeticionesPiloto/" xmlns:ns3="http://PeticionRastreo/" xmlns:ns4="SAFINAL" xmlns:ns5="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" xmlns:ns6="http://enterprise.netbeans.org/bpel/SA_TAREA/SA_TAREA" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="PeticionesClientePort" interface-name="ns1:PeticionesCliente" name="endpoint1" service-name="ns1:PeticionesCliente"/>
+        <endpoint endpoint-name="PeticionesPilotosPort" interface-name="ns2:PeticionesPilotos" name="endpoint2" service-name="ns2:PeticionesPilotos"/>
+        <endpoint endpoint-name="RastreoPeticionPort" interface-name="ns3:RastreoPeticion" name="endpoint3" service-name="ns3:RastreoPeticion"/>
+        <endpoint endpoint-name="casaPort1" interface-name="ns5:IngresoPortType" name="endpoint4" service-name="ns4:SAFINALService1"/>
+        <endpoint display-name="PartnerLink1" endpoint-name="IngresoPortTypeRole_myRole" file-path="SA_TAREA.bpel" interface-name="ns5:IngresoPortType" name="endpoint5" process-name="SA_TAREA" service-name="ns6:PartnerLink1"/>
+        <endpoint display-name="PartnerLink2" endpoint-name="PeticionesClienteRole_partnerRole" file-path="SA_TAREA.bpel" interface-name="ns1:PeticionesCliente" name="endpoint6" process-name="SA_TAREA" service-name="ns6:PartnerLink2"/>
+        <endpoint display-name="PartnerLink4" endpoint-name="RastreoPeticionRole_partnerRole" file-path="SA_TAREA.bpel" interface-name="ns3:RastreoPeticion" name="endpoint7" process-name="SA_TAREA" service-name="ns6:PartnerLink4"/>
+        <endpoint display-name="PartnerLink3" endpoint-name="PeticionesPilotosRole_partnerRole" file-path="SA_TAREA.bpel" interface-name="ns2:PeticionesPilotos" name="endpoint8" process-name="SA_TAREA" service-name="ns6:PartnerLink3"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="SA_TAREA.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="SAFINAL-SA_TAREA" unit-name="SA_TAREA" unknown="false" x="161" y="99">
+            <provides endpoint="endpoint5"/>
+            <consumes endpoint="endpoint6"/>
+            <consumes endpoint="endpoint7"/>
+            <consumes endpoint="endpoint8"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="SAFINAL-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port bindingType="soap" x="67" y="326">
+                    <link xlink:href="../jbiasa/SAFINAL.wsdl#xpointer(/definitions/service[@name='SAFINALService1']/port[@name='casaPort1'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint4"/>
+                    <provides endpoint="endpoint4"/>
+                </port>
+                <port x="67" y="197">
+                    <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Clientes/PeticionesCliente.wsdl#xpointer(/definitions/service[@name='PeticionesCliente']/port[@name='PeticionesClientePort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+                <port x="67" y="118">
+                    <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Pilotos/PeticionesPilotos.wsdl#xpointer(/definitions/service[@name='PeticionesPilotos']/port[@name='PeticionesPilotosPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+                <port x="67" y="39">
+                    <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Rastreo/RastreoPeticion.wsdl#xpointer(/definitions/service[@name='RastreoPeticion']/port[@name='RastreoPeticionPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint3"/>
+                    <provides endpoint="endpoint3"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint4" mode="" provider="endpoint5" route-type="direct" routing-rule="" state="new"/>
+        <connection consumer="endpoint6" mode="" provider="endpoint1" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint8" mode="" provider="endpoint2" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint7" mode="" provider="endpoint3" route-type="" routing-rule="" state="unchanged"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiasa/SAFINAL.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SAFINAL.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Clientes/PeticionesCliente.wsdl#xpointer(/definitions/portType[@name='PeticionesCliente'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Pilotos/PeticionesPilotos.wsdl#xpointer(/definitions/portType[@name='PeticionesPilotos'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Rastreo/RastreoPeticion.wsdl#xpointer(/definitions/portType[@name='RastreoPeticion'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/Ingreso.wsdl#xpointer(/definitions/portType[@name='IngresoPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiasa/SAFINAL.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SAFINAL.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Clientes/PeticionesCliente.wsdl#xpointer(/definitions/binding[@name='PeticionesClientePortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Pilotos/PeticionesPilotos.wsdl#xpointer(/definitions/binding[@name='PeticionesPilotosPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Rastreo/RastreoPeticion.wsdl#xpointer(/definitions/binding[@name='RastreoPeticionPortBinding'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiasa/SAFINAL.wsdl#xpointer(/definitions/service[@name='SAFINALService1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SAFINAL.wsdl#xpointer(/definitions/service[@name='SAFINALService1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Clientes/PeticionesCliente.wsdl#xpointer(/definitions/service[@name='PeticionesCliente'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Pilotos/PeticionesPilotos.wsdl#xpointer(/definitions/service[@name='PeticionesPilotos'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/SA_TAREA/desktop-rdnf1pr_8080/Rastreo/RastreoPeticion.wsdl#xpointer(/definitions/service[@name='RastreoPeticion'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>

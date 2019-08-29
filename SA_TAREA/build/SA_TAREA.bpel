@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process
+    name="SA_TAREA"
+    targetNamespace="http://enterprise.netbeans.org/bpel/SA_TAREA/SA_TAREA"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/SA_TAREA/SA_TAREA"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling">
+    <import namespace="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" location="Ingreso.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/PeticionesClienteWrapper" location="PeticionesClienteWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://PeticionesCliente/" location="http://desktop-rdnf1pr:8080/Clientes/PeticionesCliente?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/PeticionesPilotosWrapper" location="PeticionesPilotosWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://PeticionesPiloto/" location="http://desktop-rdnf1pr:8080/Pilotos/PeticionesPilotos?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/RastreoPeticionWrapper" location="RastreoPeticionWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://PeticionRastreo/" location="http://desktop-rdnf1pr:8080/Rastreo/RastreoPeticion?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="PartnerLink2" xmlns:tns="http://enterprise.netbeans.org/bpel/PeticionesClienteWrapper" partnerLinkType="tns:PeticionesClienteLinkType" partnerRole="PeticionesClienteRole"/>
+        <partnerLink name="PartnerLink4" xmlns:tns="http://enterprise.netbeans.org/bpel/RastreoPeticionWrapper" partnerLinkType="tns:RastreoPeticionLinkType" partnerRole="RastreoPeticionRole"/>
+        <partnerLink name="PartnerLink3" xmlns:tns="http://enterprise.netbeans.org/bpel/PeticionesPilotosWrapper" partnerLinkType="tns:PeticionesPilotosLinkType" partnerRole="PeticionesPilotosRole"/>
+        <partnerLink name="PartnerLink1" xmlns:tns="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" partnerLinkType="tns:Ingreso" myRole="IngresoPortTypeRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="ObtenerPilotoOut" xmlns:tns="http://PeticionesPiloto/" messageType="tns:ObtenerPilotoResponse"/>
+        <variable name="ObtenerPilotoIn" xmlns:tns="http://PeticionesPiloto/" messageType="tns:ObtenerPiloto"/>
+        <variable name="UbicarAutoOut" xmlns:tns="http://PeticionRastreo/" messageType="tns:UbicarAutoResponse"/>
+        <variable name="UbicarAutoIn" xmlns:tns="http://PeticionRastreo/" messageType="tns:UbicarAuto"/>
+        <variable name="AlmacenarDatosOut" xmlns:tns="http://PeticionesPiloto/" messageType="tns:AlmacenarDatosResponse"/>
+        <variable name="AlmacenarDatosIn" xmlns:tns="http://PeticionesPiloto/" messageType="tns:AlmacenarDatos"/>
+        <variable name="PedirUberOut" xmlns:tns="http://PeticionesCliente/" messageType="tns:PedirUberResponse"/>
+        <variable name="PedirUberIn" xmlns:tns="http://PeticionesCliente/" messageType="tns:PedirUber"/>
+        <variable name="IngresoOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" messageType="tns:IngresoOperationResponse"/>
+        <variable name="IngresoOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" messageType="tns:IngresoOperationRequest"/>
+    </variables>
+    <sequence>
+        <receive name="Receive1" createInstance="yes" partnerLink="PartnerLink1" operation="IngresoOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" portType="tns:IngresoPortType" variable="IngresoOperationIn"/>
+        <assign name="Assign1">
+            <copy>
+                <from variable="IngresoOperationIn" part="part1"/>
+                <to>$PedirUberIn.parameters/id</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke1" partnerLink="PartnerLink2" operation="PedirUber" xmlns:tns="http://PeticionesCliente/" portType="tns:PeticionesCliente" inputVariable="PedirUberIn" outputVariable="PedirUberOut"/>
+        <assign name="Assign2">
+            <copy>
+                <from>$PedirUberOut.parameters/return</from>
+                <to>$UbicarAutoIn.parameters/ubicacion</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke3" partnerLink="PartnerLink4" operation="UbicarAuto" xmlns:tns="http://PeticionRastreo/" portType="tns:RastreoPeticion" inputVariable="UbicarAutoIn" outputVariable="UbicarAutoOut"/>
+        <assign name="Assign3">
+            <copy>
+                <from>$UbicarAutoOut.parameters/return</from>
+                <to>$ObtenerPilotoIn.parameters/id</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke2" partnerLink="PartnerLink3" operation="ObtenerPiloto" xmlns:tns="http://PeticionesPiloto/" portType="tns:PeticionesPilotos" inputVariable="ObtenerPilotoIn" outputVariable="ObtenerPilotoOut"/>
+        <assign name="Assign4">
+            <copy>
+                <from>$ObtenerPilotoOut.parameters/return</from>
+                <to variable="IngresoOperationOut" part="part1"/>
+            </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="PartnerLink1" operation="IngresoOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/SA_TAREA/src/Ingreso" portType="tns:IngresoPortType" variable="IngresoOperationOut"/>
+    </sequence>
+</process>
