@@ -14,4 +14,4 @@ Los servicios fueron orquestados por medio de BPEL
 
 ## Arquitectura
 
-![Arquitectura_BPEL](https://github.com/201503865/SA-Tarea4_201503865/arq.JPG)
+![Arquitectura_BPEL](https://github.com/201503865/SA-Tarea4_201503865/arq.jpg)
